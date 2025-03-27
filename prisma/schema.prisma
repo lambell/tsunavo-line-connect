@@ -1,0 +1,60 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Shop {
+  id                String   @id @default(cuid())
+  shopifyShopDomain String   @unique
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // LINE設定
+  lineMessagingConfig LineMessagingConfig?
+  lineLoginConfig     LineLoginConfig?
+}
+
+// LINE Messaging API設定
+model LineMessagingConfig {
+  id        String   @id @default(cuid())
+  shopId    String   @unique
+  shop      Shop     @relation(fields: [shopId], references: [id])
+
+  channelId     String
+  channelSecret String
+  channelToken  String?
+
+  // Webhook設定
+  webhookUrl    String?
+  webhookSecret String?
+
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([shopId])
+}
+
+// LINEログイン設定
+model LineLoginConfig {
+  id        String   @id @default(cuid())
+  shopId    String   @unique
+  shop      Shop     @relation(fields: [shopId], references: [id])
+
+  channelId     String
+  channelSecret String
+  liffId        String
+
+  // リダイレクト設定
+  redirectUrls String[]
+
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([shopId])
+} 

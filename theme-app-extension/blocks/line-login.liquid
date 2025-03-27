@@ -1,0 +1,36 @@
+{% schema %}
+{
+  "name": "LINE Login",
+  "target": "section",
+  "stylesheet": "line-login.css",
+  "javascript": "line-login.js",
+  "settings": []
+}
+{% endschema %}
+
+<div class="line-login-block">
+  <button class="line-login-button" onclick="handleLineLogin()">
+    LINEでログイン
+  </button>
+</div>
+
+<style>
+.line-login-block {
+  padding: 20px;
+  text-align: center;
+}
+
+.line-login-button {
+  background-color: #00B900;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.line-login-button:hover {
+  opacity: 0.9;
+}
+</style> 

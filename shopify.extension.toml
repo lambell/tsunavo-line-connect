@@ -1,0 +1,14 @@
+name = "Tsunavo LINE Connect"
+type = "theme"
+extension_points = ["theme"]
+
+[[extensions]]
+handle = "line-login"
+name = "LINE Login Block"
+description = "LINEログインを表示するブロック"
+type = "block"
+target = "section"
+
+[extensions.settings]
+type = "object"
+fields = [] 
